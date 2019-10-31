@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
+import { connect } from 'react-redux'
+
 import {
     HeaderWrapper,
     Logo,
@@ -6,10 +9,19 @@ import {
     NavItem,
     NavSearch,
     Addition,
-    Button
+    Button,
+    NavSearchWrapper
 } from './style'
 
 class Header extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            foucsed: false
+        }
+        this.handleFocus = this.handleFocus.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+    }
     render() {
         return (
             <HeaderWrapper>
@@ -21,7 +33,19 @@ class Header extends Component {
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
-                    <NavSearch></NavSearch>
+                    <NavSearchWrapper>
+                        <CSSTransition
+                            in={this.state.foucsed}
+                            timeout={200}
+                            classNames="slider">
+                            <NavSearch
+                                onFocus={this.handleFocus}
+                                onBlur={this.handleBlur}
+                                className={this.state.foucsed ? 'foucsed' : ''}
+                                ></NavSearch>
+                        </CSSTransition>
+                        <i className={this.state.foucsed ? 'iconfont foucsed' : 'iconfont'}>&#58935;</i>
+                    </NavSearchWrapper>
                 </Nav>
                 <Addition>
                     <Button className="writting">写文章</Button>
@@ -30,6 +54,26 @@ class Header extends Component {
             </HeaderWrapper>
         )
     }
+    handleFocus (evt) {
+        this.setState({
+            foucsed: true
+        })
+    }
+    handleBlur (evt) {
+        this.setState({
+            foucsed: false
+        })
+    }
 }
 
-export default Header
+const mapStateToProps = () => {
+    return {
+
+    }
+}
+const mapDispathToProps = () => {
+    return {
+
+    }
+}
+export default connect(null, null)(Header)
