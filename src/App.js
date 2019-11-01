@@ -11,9 +11,10 @@ function App() {
     <div className="App">
       <GlobalStyle/>
       <GlobalStyleIconfont/>
-      {/* <Provider store={store}> */}
+      {/* 注入store, provider里面的组件都能拿到store数据 */}
+      <Provider store={store}>
         <Header></Header>
-      {/* </Provider> */}
+      </Provider>
     </div>
   )
 }
