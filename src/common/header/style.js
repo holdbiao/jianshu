@@ -82,6 +82,20 @@ export const SearchInfoSwitch = styled.span`
     font-size: 13px;
     cursor: pointer;
 `
+export const SearchInfoList = styled.div``
+export const SearchInfoItem = styled.a`
+    display: block;
+    float: left;
+    line-height: 20px;
+    padding: 0 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    color: #969696;
+    border-radius: 2px;
+    cursor: pointer;
+`
 
 export const NavSearch = styled.input.attrs({
     placeholder: '搜索'

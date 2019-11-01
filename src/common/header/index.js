@@ -14,7 +14,9 @@ import {
     NavSearchWrapper,
     SearchInfo,
     SearchInfoTitle,
-    SearchInfoSwitch
+    SearchInfoSwitch,
+    SearchInfoList,
+    SearchInfoItem
 } from './style'
 
 const Header = function (props) { // 无状态组件，有助提高性能
@@ -46,6 +48,21 @@ const Header = function (props) { // 无状态组件，有助提高性能
                                 热门搜索
                                 <SearchInfoSwitch>换一批</SearchInfoSwitch>
                             </SearchInfoTitle>
+                            <SearchInfoList>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                                <SearchInfoItem>教育</SearchInfoItem>
+                            </SearchInfoList>
                         </SearchInfo>
                     }
                 </NavSearchWrapper>
