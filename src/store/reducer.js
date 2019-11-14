@@ -2,10 +2,14 @@
 import { combineReducers } from 'redux-immutable' // 使用了immutable对象
 import { reducer as headerReducer } from '../common/header/store'
 import { reducer as homeReducer } from '../pages/home/store'
+import { reducer as detailReducer } from '../pages/detail/store'
+import { reducer as loginReducer } from '../pages/login/store'
 
 export default combineReducers({ // 合并reducer
     header: headerReducer,
-    home: homeReducer
+    home: homeReducer,
+    detail: detailReducer,
+    login: loginReducer
 })
 
 // const defaultStore = {

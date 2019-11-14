@@ -1,5 +1,3 @@
-export const SEARCH_FOCUS = 'search/search_focus'
-export const SEARCH_BLUR = 'search/search_blur'
-export const CHANGE_LIST = 'search/change_list'
-export const SEARCH_HOT_LIST = 'search/search_hot_out'
-export const CHANGE_PAGE = 'search/change_page'
+export const CHANGE_HOME_DATA = 'home/change_home_data'
+export const HOME_MORE = 'home/home_more'
+export const HOME_SCORLL = 'home/home_scroll'

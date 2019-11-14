@@ -2,35 +2,38 @@ import * as constants from './constants'
 import { fromJS } from 'immutable'
 import axios from 'axios'
 
-export const searchFocus = {
-  type: constants.SEARCH_FOCUS
-}
-
-export const searchBlur = {
-  type: constants.SEARCH_BLUR
-}
-
-const changeList = (data) => ({
-  type: constants.CHANGE_LIST,
-  data: fromJS(data), // 普通数组修改成immutable类型
-  totalPage: data.length
+const changeHomeListAction = (result) => ({
+  type: constants.CHANGE_HOME_DATA,
+  topicList: result.topicList,
+  articleList: result.articleList
 })
-
-export const getList = () => { // 使用了redux-thunk就可以返回方法
+export const changeHomeList = () => {
   return (dispatch) => {
-    axios.get('/api/headerList.json').then(res => {
-      // console.log(res.data)
-      const action = changeList(res.data.data)
-      dispatch(action)
-    }).catch(err => console.log(err))
+    axios.get('/api/home.json').then(res => {
+      const result = res.data.data
+      dispatch(changeHomeListAction(result))
+    }).catch(err => {
+        console.log(err)
+    })
   }
 }
 
-export const changeMoveIn = {
-  type: constants.SEARCH_HOT_LIST
+const homeMore = (result) => ({
+  type: constants.HOME_MORE,
+  articleList: fromJS(result)
+})
+export const handleMore = () => {
+  return (dispatch) => {
+    axios.get('/api/homeMore.json').then(res => {
+      const result = res.data.data
+      dispatch(homeMore(result))
+    }).catch(err => {
+        console.log(err)
+    })
+  }
 }
 
-export const changePage = (data) => ({
-  type: constants.CHANGE_PAGE,
-  data
+export const scrollTop = (show) => ({
+  type: constants.HOME_SCORLL,
+  show
 })

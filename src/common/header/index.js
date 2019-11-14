@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux' // 连接store的provider
 import { actionCreators } from './store'
-
+import { Link } from 'react-router-dom'
+import * as loginActionCreators from '../../pages/login/store/actionCreators'
 import {
     HeaderWrapper,
     Logo,
@@ -37,14 +38,19 @@ class Header extends Component { // 容器组件
         return pageList
     }
     render () {
-        const { focused, handleFocus, handleBlur, moveIn, handleMoveLeave, changePage, totalPage, page, list } = this.props // 代码调优
+        const { focused, handleFocus, handleBlur, moveIn, handleMoveLeave, changePage, totalPage, page, list, loginStatus } = this.props // 代码调优
         return (
             <HeaderWrapper>
                 <Logo></Logo>
                 <Nav>
                     <NavItem className="left">首页</NavItem>
                     <NavItem className="left">下载App</NavItem>
-                    <NavItem className="right">登录</NavItem>
+                    {
+                        loginStatus ?<NavItem className="right logout" onClick={this.props.handleLogout}>退出</NavItem>
+                            :(<Link to='/login'>
+                                <NavItem className="right">登录</NavItem>
+                            </Link>)
+                    }
                     <NavItem className="right">
                         <i className="iconfont">&#xe636;</i>
                     </NavItem>
@@ -86,7 +92,9 @@ class Header extends Component { // 容器组件
                     </NavSearchWrapper>
                 </Nav>
                 <Addition>
-                    <Button className="writting">写文章</Button>
+                    <Link to="/write">
+                        <Button className="writting">写文章</Button>
+                    </Link>
                     <Button className="reg">注册</Button>
                 </Addition>
             </HeaderWrapper>
@@ -105,7 +113,8 @@ const mapStateToProps = (state) => { // 接收provider的数据, 映射到props�
         list: state.getIn(['header', 'list']),
         page: state.getIn(['header', 'page']),
         moveIn: state.getIn(['header', 'moveIn']),
-        totalPage: state.getIn(['header', 'totalPage'])
+        totalPage: state.getIn(['header', 'totalPage']),
+        loginStatus: state.getIn(['login', 'loginStatus'])
     }
 }
 const mapDispathToProps = (dispatch) => { // dispatch 派发数据到store, 将里面的方法映射到props上
@@ -125,6 +134,9 @@ const mapDispathToProps = (dispatch) => { // dispatch 派发数据到store, 将�
             let next = 1
             page < totalPage ? next = page + 1 : next = 1
             dispatch(actionCreators.changePage(next))
+        },
+        handleLogout () {
+            dispatch(loginActionCreators.logout())
         }
     }
 }
